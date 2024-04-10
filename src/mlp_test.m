@@ -60,36 +60,27 @@ Dtest=[D1,D2,D3];
 
 desireoutput=[ones(1,col1),2*ones(1,col2),3*ones(1,col3)];
 C=confusionmat(realoutput,desireoutput);
-m = 0
 confusionchart(C);
 A=sum(diag(C))/sum(sum(C))*100;
 path="C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\wrongclf\";
 
 for x = 1:col1
     if realoutput(x) ~= desireoutput(x)
-        % m = m +1
         img_path = [file1(x).folder,'\',file1(x+2).name]
-        movefile(img_path,path)
+        copyfile(img_path,path)
     end
 end
 
 for y = 1:col2
     if realoutput(y+col1) ~= desireoutput(y+col1)
-        m = m +1
         img_path = [file2(1).folder,'\',file2(y+2).name]
-        movefile(img_path,path)
+        copyfile(img_path,path)
     end
 end
 
 for z = 1:col3
     if realoutput(z+col1+col2) ~= desireoutput(z+col1+col2)
         img_path = [file3(1).folder,'\',file3(z+2).name]
-        movefile(img_path,path)
+        copyfile(img_path,path)
     end
 end
-    % disp(ValidareD(i))
-    % if ValidareD(i) ~= ValidareTest(i)
-    %     img = imread(imds.Files{i});
-    %     name=path+i+".png"
-    %     imwrite(img,name)
-    % end
