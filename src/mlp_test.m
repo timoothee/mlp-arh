@@ -62,25 +62,47 @@ desireoutput=[ones(1,col1),2*ones(1,col2),3*ones(1,col3)];
 C=confusionmat(realoutput,desireoutput);
 confusionchart(C);
 A=sum(diag(C))/sum(sum(C))*100;
-path="C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\wrongclf\";
+path='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\wrongclf\';
 
 for x = 1:col1
     if realoutput(x) ~= desireoutput(x)
-        img_path = [file1(x).folder,'\',file1(x+2).name]
-        copyfile(img_path,path)
+        if realoutput(x) == 2
+            pathB = [path, '1 as 2\'];
+            img_path = [file1(x).folder,'\',file1(x+2).name]
+            copyfile(img_path,pathB)
+        else
+            pathC=[path,'1 as 3\'];
+            img_path = [file1(x).folder,'\',file1(x+2).name]
+            copyfile(img_path,pathC)
+        end
+
     end
 end
 
 for y = 1:col2
     if realoutput(y+col1) ~= desireoutput(y+col1)
-        img_path = [file2(1).folder,'\',file2(y+2).name]
-        copyfile(img_path,path)
+        if realoutput(y+col1) == 1
+            pathB = [path, '2 as 1\'];
+            img_path = [file2(1).folder,'\',file2(y+2).name]
+            copyfile(img_path,pathB)
+        else 
+            pathC=[path,'2 as 3\'];
+            img_path = [file2(1).folder,'\',file2(y+2).name]
+            copyfile(img_path,pathC)
+        end 
     end
 end
 
 for z = 1:col3
     if realoutput(z+col1+col2) ~= desireoutput(z+col1+col2)
-        img_path = [file3(1).folder,'\',file3(z+2).name]
-        copyfile(img_path,path)
+        if realoutput(z+col1+col2) == 1
+            pathB = [path, '3 as 1\'];
+            img_path = [file3(1).folder,'\',file3(z+2).name]
+            copyfile(img_path,pathB)
+        else
+            pathC=[path,'3 as 2\'];
+            img_path = [file3(1).folder,'\',file3(z+2).name]
+            copyfile(img_path,pathC)
+        end
     end
 end

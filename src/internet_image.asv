@@ -1,0 +1,19 @@
+clc
+clear
+close all
+
+load('MLPtrain')
+
+int_images = ['altar_ex.jpg','apse','']
+
+img=imread('altar_ex.jpg');
+img1=im2double(img);
+resized_image = imresize(img1, [24, 24]);
+
+O=MLPnet(resized_image(:))
+
+if (O(1)>O(2))
+    title='Cifra3';
+else
+    title='cifra5';
+end
