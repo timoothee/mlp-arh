@@ -1,0 +1,28 @@
+clc
+clear
+close all
+
+% stained glass
+path1='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\stained_glass\';
+file1=dir(path1);
+
+% vault
+path2='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\vault\';
+file2=dir(path2);
+
+% vault
+path3='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\column\';
+file3=dir(path3);
+
+dataTrain=[];
+
+x = size(fisier,1);
+y = length(fisier);
+
+
+for i =3:size(fisier,1)
+    imag = fisier(i).name;
+    imagcale= [path, imag];
+    imagg=im2double(imread(imagcale));
+    dataTrain1(:,i-2)=imagg(:);
+end
