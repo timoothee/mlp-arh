@@ -9,19 +9,19 @@ path1='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\test\9_alt
 file1=dir(path1);
 
 % vault 163
-path2='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\test\0_apse\';
+path2='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\test\2_dome(inner)\';
 file2=dir(path2);
 
 % column 210
 path3='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\test\6_bell_tower\';
 file3=dir(path3);
-
+rsimg=24;
 dataTest1=[];
 for i =3:length(file1)
     img = file1(i).name;
     imgpath= [path1, img];
     imagd=im2double(imread(imgpath));
-    resized_image = imresize(imagd, [24, 24]);
+    resized_image = imresize(imagd, [rsimg, rsimg]);
     dataTest1(:,i-2)=resized_image(:);
 end
 
@@ -30,7 +30,7 @@ for i =3:length(file2)
     img = file2(i).name;
     imgpath= [path2, img];
     imagd=im2double(imread(imgpath));
-    resized_image = imresize(imagd, [24, 24]);
+    resized_image = imresize(imagd, [rsimg, rsimg]);
     dataTest2(:,i-2)=resized_image(:);
 end
 
@@ -39,7 +39,7 @@ for i =3:length(file3)
     img = file3(i).name;
     imgpath= [path3, img];
     imagd=im2double(imread(imgpath));
-    resized_image = imresize(imagd, [24, 24]);
+    resized_image = imresize(imagd, [rsimg, rsimg]);
     dataTest3(:,i-2)=resized_image(:);
 end
 
@@ -75,7 +75,6 @@ for x = 1:col1
             img_path = [file1(x).folder,'\',file1(x+2).name]
             copyfile(img_path,pathC)
         end
-
     end
 end
 

@@ -7,19 +7,20 @@ path1='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\alta
 file1=dir(path1);
 
 % vault 1110
-path2='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\apse\';
+path2='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\dome(inner)\';
 file2=dir(path2);
 
 % column 1919
 path3='C:\Users\uie99388\ULBS an IV\Sem 2\Retele\mlp-arh\architecture\train\bell_tower\';
 file3=dir(path3);
 
+rsimg=24;
 dataTrain1=[];
 for i =3:length(file1)
     img = file1(i).name;
     imgpath= [path1, img];
     imagd=im2double(imread(imgpath));
-    resized_image = imresize(imagd, [24, 24]);
+    resized_image = imresize(imagd, [rsimg, rsimg]);
     dataTrain1(:,i-2)=resized_image(:);
 end
 
@@ -28,7 +29,7 @@ for i =3:length(file2)
     img = file2(i).name;
     imgpath= [path2, img];
     imagd=im2double(imread(imgpath));
-    resized_image = imresize(imagd, [24, 24]);
+    resized_image = imresize(imagd, [rsimg, rsimg]);
     dataTrain2(:,i-2)=resized_image(:);
 end
 
@@ -37,7 +38,7 @@ for i =3:length(file3)
     img = file3(i).name;
     imgpath= [path3, img];
     imagd=im2double(imread(imgpath));
-    resized_image = imresize(imagd, [24, 24]);
+    resized_image = imresize(imagd, [rsimg, rsimg]);
     dataTrain3(:,i-2)=resized_image(:);
 end
 
@@ -48,12 +49,20 @@ D2=[zeros(1,size(dataTrain2,2));ones(1,size(dataTrain2,2));zeros(1,size(dataTrai
 D3=[zeros(1,size(dataTrain3,2));zeros(1,size(dataTrain3,2));ones(1,size(dataTrain3,2))];
 Dtrain=[D1,D2,D3];
 
-N=20;
-MLPnet = patternnet(N);
+%hiddenActivationFunction = 'tansig'; % Specify activation function for hidden layers
+%outputActivationFunction = 'softmax'; % Specify activation function for output layer
+% maxValidationFailures = 15; % Specify maximum number of validation failures
+hiddenLayerSizes = [10, 10, 20];
+% N=50;
+MLPnet = patternnet(5);
 
-MLPnet.divideParam.trainRatio=0.70;
-MLPnet.divideParam.valRatio=0.30;
-MLPnet.divideParam.testRatio=0.00;
+MLPnet.trainParam.epochs = 50;
+%MLPnet.layers{1}.transferFcn = hiddenActivationFunction;
+%MLPnet.layers{2}.transferFcn = outputActivationFunction;
+% MLPnet.trainParam.max_fail = maxValidationFailures;
+% MLPnet.divideParam.trainRatio=0.70;
+% MLPnet.divideParam.valRatio=0.30;
+% MLPnet.divideParam.testRatio=0.00;
 
 MLPnet=train(MLPnet,dataTrainall,Dtrain);
 save('MLPtrain','MLPnet');
